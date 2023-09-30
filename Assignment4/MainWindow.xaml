@@ -1,0 +1,211 @@
+﻿<Window x:Class="Assignment4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assignment4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="DarkOliveGreen">
+        <StackPanel RenderOptions.BitmapScalingMode="LowQuality">
+            <TextBlock Text="BlackJack" HorizontalAlignment="Center" Margin="0, 10, 0, 0" FontSize="20" Foreground="White" FontWeight="Bold"></TextBlock>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                
+                
+                <!-- Button area-->
+                <Border Grid.Column="0" Padding="10">
+                    <StackPanel>
+
+                        <Border Padding="1" Margin="0, 0, 0, 10" Background="#666">
+                            <StackPanel Background="White">
+                                <TextBlock Text="Info" FontWeight="Bold" FontSize="16" Margin="5, 5, 5, 0"/>
+                                <TextBlock x:Name="gameInfoBlock" Text="Click new game to start a new game" Margin="5" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Current game info -->
+                        <Border Background="#666" Padding="1">
+                            <Grid Background="#fff">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- static text -->
+                            <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Players: "/>
+                                    <TextBlock Text="Decks: "/>
+                                    <TextBlock Text="Rounds left: "/>
+                                    <TextBlock Text="Cards left: "/>
+                            </StackPanel>
+
+                            <!-- dynamic info about game -->
+                            <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="totalPlayers" Text="0"/>
+                                    <TextBlock x:Name="totalDecks" Text="0"/>
+                                    <TextBlock x:Name="roundsLeft" Text="0"/>
+                                    <TextBlock x:Name="cardsLeft" Text="0"/>
+                            </StackPanel>
+                            
+                        </Grid>
+                        </Border>
+
+                        <StackPanel Margin="0, 20, 0, 0">
+                            <Button x:Name="standBtn" Click="standBtn_Click" Content="Stand"></Button>
+                            <Button x:Name="hitBtn" Click="hitBtn_Click" Content="Hit" Margin="0, 5, 0, 0"></Button>
+                            <Button x:Name="shuffleBtn" Click="shuffleBtn_Click" Content="Shuffle cards" Margin="0, 5, 0, 0"></Button>
+                        </StackPanel>
+
+                        <StackPanel Margin="0, 30, 0, 0">
+                            <Button x:Name="newGameBtn" Click="newGameBtn_Click" Content="New Game"></Button>
+                            <Button x:Name="quitBtn" Click="quitBtn_Click" Content="Quit" Margin="0, 5, 0, 0"></Button>
+                            <Button x:Name="databaseBtn" Click="databaseBtn_Click" Content="Database" Margin="0, 5, 0, 0"></Button>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </Border>
+
+                <!-- Game area-->
+                <Grid Grid.Column="1">
+
+                    <!-- Inner grid, player 1 and player 2-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Player 1 -->
+                        <StackPanel Grid.Column="0">
+                            <Border Padding="5"/>
+
+                            <!-- Player 1 Game area -->
+                            <Border Padding="5">
+                                <ListView x:Name="player1List" Background="Transparent" MinHeight="250">
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding imagePath}" Width="100" RenderOptions.BitmapScalingMode="LowQuality"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+
+                                    <!-- add images here -->
+                                    
+                                   <!-- Test image
+                                    <ListViewItem>
+                                        <Image Source="/images/10C.png" Width="100"/>
+                                    </ListViewItem>
+                                    -->
+
+
+                                </ListView>
+                            </Border>
+
+                            <!-- Player 1 info -->
+                            <Border Padding="1" Margin="5" Background="#666">
+                                <StackPanel Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Name: "/>
+                                        <TextBlock Text="Hand value: "/>
+                                        <TextBlock Text="Cards: "/>
+                                        <TextBlock Text="Points: "/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1">
+                                        
+                                         <TextBlock x:Name="player1Name" Text=""/>
+                                        <TextBlock x:Name="player1HandValue" Text="0"/>
+                                        <TextBlock x:Name="player1CardCount" Text="0"/>
+                                            <TextBlock x:Name="player1Points" Text="0"/>
+
+                                        </StackPanel>
+
+                                </Grid>
+
+                            </StackPanel>
+                            </Border>
+                            
+                        </StackPanel>
+
+                        <!-- Player 2 -->
+                        <StackPanel Grid.Column="1">
+                            <Border Padding="5"/>
+
+                            <!-- Player 1 Game area -->
+                            <Border Padding="5">
+                                <ListView x:Name="player2List" Background="Transparent" MinHeight="250">
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding imagePath}" Width="100" RenderOptions.BitmapScalingMode="LowQuality"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+
+                                    <!-- add images here -->
+                                    
+                                </ListView>
+                            </Border>
+
+                            <!-- Player 2 info -->
+                            <Border Padding="1" Margin="5" Background="#666">
+                                <StackPanel Background="White">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Name: "/>
+                                            <TextBlock Text="Hand value: "/>
+                                            <TextBlock Text="Cards: "/>
+                                            <TextBlock Text="Points: "/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1">
+                                            
+                                             <TextBlock x:Name="player2Name" Text=""/>
+                                            <TextBlock x:Name="player2HandValue" Text="0"/>
+                                            <TextBlock x:Name="player2CardCount" Text="0"/>
+                                            <TextBlock x:Name="player2Points" Text="0"/>
+                                      
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+
+                    </Grid>
+                    
+                </Grid>
+                
+            </Grid>
+            
+
+        </StackPanel>
+    </Grid>
+</Window>
