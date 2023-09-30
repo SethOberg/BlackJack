@@ -7,4 +7,5 @@ The game features a computer player and saves the result of the player to a data
 * C#
 * .NET
 * Entity framework
+* Microsoft SQL Server
 * WPF
